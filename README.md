@@ -1,7 +1,7 @@
-## Fragment + ViewPager + Indicator 만들기
+## 1. Fragment + ViewPager + Indicator 만들기
 ![2024-06-05 15;02;53](https://github.com/chihyeonwon/how_weather/assets/58906858/986be614-1e8a-4e3d-84ec-7406dea64d7b)
 
-1. **오늘 날씨 화면 UI 만들기**
+## 2. **오늘 날씨 화면 UI 만들기**    
 ![image](https://github.com/chihyeonwon/how_weather/assets/58906858/176fe121-30e9-4658-b706-471a655d4be0)
 
     - 화면 사진과 속성을 참고하여 직접 UI를 구성해 보거나 코드스니펫을 활용해 주세요.
