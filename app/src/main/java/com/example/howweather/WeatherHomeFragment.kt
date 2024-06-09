@@ -25,6 +25,18 @@ class WeatherHomeFragment : Fragment() {
     ): View? {
 
         _binding = FragmentWeatherHomeBinding.inflate(inflater, container, false)
+        with(binding) {
+            // 임시로 현재 날씨는 0번 Dummy Data로 설정
+            val data = WeatherDataList.list.get(0)
+            mainWeatherText.text = data.skyStatus.text
+            mainTemperTv.text = data.temperature
+            mainRainTv.text = data.rainState.value.toString()
+            mainWaterTv.text = data.humidity
+            mainWindTv.text = data.windSpeed
+            mainRainPercentTv.text = getString(R.string.rain_percent, data.rainPercent)
+            rainStatusIv.setImageResource(data.rainState.icon)
+            weatherStatusIv.setImageResource(data.skyStatus.colorIcon)
+        }
         return binding.root
 
     }
@@ -32,9 +44,6 @@ class WeatherHomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }
     }
 
     override fun onDestroyView() {
