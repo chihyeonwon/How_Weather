@@ -9,8 +9,8 @@ class WeatherFragmentStateAdapter(activity: AppCompatActivity) : FragmentStateAd
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> FirstFragment()
-            else -> SecondFragment()
+            0 -> WeatherHomeFragment()
+            else -> WeatherListFragment()
         }
     }
 }
