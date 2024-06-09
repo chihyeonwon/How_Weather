@@ -32,3 +32,7 @@
 - **풍속/습도 영역:** 강수량 영역 참고
 
 - 
+![image](https://github.com/chihyeonwon/how_weather/assets/58906858/7e50321f-eb99-4b46-87ed-f90ff6e7a6fe)
+```
+시간대 별 날씨, 기온, 강수 형태를 보여주는 리스트를 보여주는 날짜 리스트 페이지를 구성하였다.
+```
