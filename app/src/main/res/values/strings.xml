@@ -8,4 +8,6 @@
     <string name="previous">Previous</string>
 
     <string name="temp_text">%1$s℃</string>
+
+    <string name="rain_percent">강수 확률 %1$s%%</string>
 </resources>
