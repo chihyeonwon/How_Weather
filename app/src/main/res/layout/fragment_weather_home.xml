@@ -1,35 +1,319 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WeatherHomeFragment">
+    android:background="#33FFFFFF"
+    android:paddingVertical="30dp"
+    tools:context=".ui.home.HomeFragment">
+
+    <TextView
+        android:id="@+id/region_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="29dp"
+        android:text="지역 선택"
+        android:textColor="#9DA7AE"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/selected_region_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="서울특별시"
+        android:textColor="#323537"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/region_text"
+        app:layout_constraintTop_toBottomOf="@id/region_text" />
+
+    <ImageView
+        android:id="@+id/select_region_button"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="4dp"
+        android:src="@drawable/ic_arrow_right"
+        app:layout_constraintBottom_toBottomOf="@+id/selected_region_text"
+        app:layout_constraintStart_toEndOf="@+id/selected_region_text"
+        app:layout_constraintTop_toTopOf="@+id/selected_region_text" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+        android:id="@+id/main_weather_layout"
+        android:layout_width="0dp"
+        android:layout_height="281dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/main_weather_background"
+        android:paddingHorizontal="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selected_region_text">
 
-        <Button
-            android:id="@+id/button_first"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/next"
-            app:layout_constraintBottom_toTopOf="@id/textview_first"
-            app:layout_constraintEnd_toEndOf="parent"
+        <ImageView
+            android:id="@+id/weather_status_iv"
+            android:layout_width="133dp"
+            android:layout_height="92dp"
+            android:layout_marginTop="35dp"
+            android:src="@drawable/ic_color_sunny_cloudy"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textview_first"
+            android:id="@+id/main_temper_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/lorem_ipsum"
+            android:layout_marginEnd="15dp"
+            android:includeFontPadding="false"
+            android:text="3"
+            android:textColor="@color/white"
+            android:textSize="110sp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/ic_temp_view"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_temperature"
+            app:layout_constraintBottom_toBottomOf="@id/main_temper_tv"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_first" />
+            app:layout_constraintTop_toTopOf="@id/main_temper_tv"
+            app:layout_constraintVertical_bias="0.2" />
+
+        <TextView
+            android:id="@+id/main_weather_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="62dp"
+            android:text="대체로 흐림"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_rain_layout"
+        android:layout_width="0dp"
+        android:layout_height="131dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rectangle_background"
+        android:elevation="10dp"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_weather_layout">
+
+        <ImageView
+            android:id="@+id/ic_rain_view"
+            android:layout_width="7dp"
+            android:layout_height="12dp"
+            android:src="@drawable/ic_water_drop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/main_rain_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:includeFontPadding="true"
+            android:text="강수량"
+            android:textColor="#9DA7AE"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/ic_rain_view"
+            app:layout_constraintStart_toEndOf="@id/ic_rain_view"
+            app:layout_constraintTop_toTopOf="@id/ic_rain_view"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <ImageView
+            android:id="@+id/rain_status_iv"
+            android:layout_width="100dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="40dp"
+            android:src="@drawable/ic_cloudy"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/main_rain_text"
+            app:tint="#FF007CE8" />
+
+        <TextView
+            android:id="@+id/main_rain_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:includeFontPadding="false"
+            android:text="0"
+            android:textColor="#007CE8"
+            android:textSize="64sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.75"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/rain_mm_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mm"
+            android:textColor="#5F666B"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/main_rain_tv"
+            app:layout_constraintStart_toEndOf="@id/main_rain_tv"
+            app:layout_constraintTop_toTopOf="@id/main_rain_tv"
+            app:layout_constraintVertical_bias="0.8" />
+
+
+        <TextView
+            android:id="@+id/main_rain_percent_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="21dp"
+            android:text="@string/rain_percent"
+            android:textColor="#5F666B"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rain_mm_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_wind_layout"
+        android:layout_width="0dp"
+        android:layout_height="132dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="21dp"
+        android:background="@drawable/rectangle_background"
+        android:elevation="10dp"
+        android:padding="12dp"
+        app:layout_constraintEnd_toStartOf="@id/main_water_layout"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_rain_layout">
+
+        <ImageView
+            android:id="@+id/ic_wind_view"
+            android:layout_width="14dp"
+            android:layout_height="10dp"
+            android:src="@drawable/ic_wind"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/main_wind_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:includeFontPadding="true"
+            android:text="풍속"
+            android:textColor="#9DA7AE"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/ic_wind_view"
+            app:layout_constraintStart_toEndOf="@id/ic_wind_view"
+            app:layout_constraintTop_toTopOf="@id/ic_wind_view"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <TextView
+            android:id="@+id/main_wind_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="40dp"
+            android:includeFontPadding="false"
+            android:text="5"
+            android:textColor="#5F666B"
+            android:textSize="64sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/wind_ms_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="m/s"
+            android:textColor="#5F666B"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/main_wind_tv"
+            app:layout_constraintStart_toEndOf="@id/main_wind_tv"
+            app:layout_constraintTop_toTopOf="@id/main_wind_tv"
+            app:layout_constraintVertical_bias="0.5" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_water_layout"
+        android:layout_width="0dp"
+        android:layout_height="132dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/rectangle_background"
+        android:elevation="10dp"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/main_wind_layout"
+        app:layout_constraintTop_toTopOf="@id/main_wind_layout">
+
+        <ImageView
+            android:id="@+id/ic_water_view"
+            android:layout_width="14dp"
+            android:layout_height="10dp"
+            android:src="@drawable/ic_wind"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/main_water_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:includeFontPadding="true"
+            android:text="습도"
+            android:textColor="#9DA7AE"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/ic_water_view"
+            app:layout_constraintStart_toEndOf="@id/ic_water_view"
+            app:layout_constraintTop_toTopOf="@id/ic_water_view"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <TextView
+            android:id="@+id/main_water_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:includeFontPadding="false"
+            android:text="69"
+            android:textColor="#5F666B"
+            android:textSize="64sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/water_percent_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="%"
+            android:textColor="#5F666B"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/main_water_tv"
+            app:layout_constraintStart_toEndOf="@id/main_water_tv"
+            app:layout_constraintTop_toTopOf="@id/main_water_tv"
+            app:layout_constraintVertical_bias="0.5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
