@@ -1,3 +1,11 @@
+## What is How Weather Applicatoin?
+How초단기실황, 초단기예보, 단기((구)동네)예보, 예보버전 정보를 조회하는 앱 서비스입니다.        
+초단기실황정보는 예보 구역에 대한 대표 AWS 관측값을, 초단기예보는 예보시점부터 6시간까지의 예보를,     
+단기예보는 예보기간을 글피까지 확장 및 예보단위를 상세화(3시간→1시간)하여 시공간적으로 세분화한 예보를 제공합니다.    
+     
+Develoepr. Won Chi Hyeon
+- 
+
 ## 1. Fragment + ViewPager + Indicator 만들기
 ![2024-06-05 15;02;53](https://github.com/chihyeonwon/how_weather/assets/58906858/986be614-1e8a-4e3d-84ec-7406dea64d7b)
 
@@ -38,3 +46,13 @@
 ```
 ## 오늘 날씨 화면 & 시간대 별 날씨 리스트 화면 구현
 ![2024-06-10 19;39;39](https://github.com/chihyeonwon/how_weather/assets/58906858/a691393a-c957-496c-b41a-5ea976cc15f0)
+
+## 공공 데이터 포탈에서 오늘 날씨 정보 찾기!
+정부 및 공공 기관이 보유한 다양한 데이터를 일반인, 개발자, 기업 등에게 공개하는 곳으로, 
+날씨, 교통, 보건, 교육 등 다양한 분야의 데이터를 제공하고 있답니다!
+
+#### 공공데이터 포털 데이터 신청
+![image](https://github.com/chihyeonwon/How_Weather/assets/58906858/03d9c8b5-d8be-40e9-8d1b-e187b457ef62)
+
+#### 요청 변수에 대한 도메인 이해 (단기 예보 3일, 5시 발표)
+![image](https://github.com/chihyeonwon/How_Weather/assets/58906858/7cceaf6a-27d1-425c-97fe-355480488637)
