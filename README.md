@@ -1,9 +1,9 @@
-## What is How Weather Applicatoin?
+## What is How Weather Applicatoin? ❓️
 How초단기실황, 초단기예보, 단기((구)동네)예보, 예보버전 정보를 조회하는 앱 서비스입니다.        
 초단기실황정보는 예보 구역에 대한 대표 AWS 관측값을, 초단기예보는 예보시점부터 6시간까지의 예보를,     
 단기예보는 예보기간을 글피까지 확장 및 예보단위를 상세화(3시간→1시간)하여 시공간적으로 세분화한 예보를 제공합니다.    
      
-Develoepr. Won Chi Hyeon, MIT License
+Developer. Won Chi Hyeon, MIT License
 - 
 
 ## 1. Fragment + ViewPager + Indicator 만들기
