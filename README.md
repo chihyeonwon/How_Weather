@@ -97,6 +97,9 @@ object RetrofitInstance {
 ```
 3. **API 인터페이스 정의: 서비스의 각 HTTP 엔드 포인트에 대해 메서드를 정의하는 인터페이스를 생성**
 ![image](https://github.com/chihyeonwon/How_Weather/assets/58906858/c524bc5f-698a-4a2a-923b-e756c1aac476)
+```
+필수항목 1번은 필수 기입, 0번은 옵션
+```
 #### 단기예보 현업운영 발표시간 별 예보시각 
 ![image](https://github.com/chihyeonwon/How_Weather/assets/58906858/16e52f60-273d-4e20-8123-48d067a276d5)
 #### nx, ny 지역별 x, y 위치값 
