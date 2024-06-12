@@ -158,6 +158,10 @@ interface WeatherService {
   }
 }
 ```
+#### API 항목별 의미 => API 문서 참조
+![image](https://github.com/chihyeonwon/How_Weather/assets/58906858/0fab652d-b586-4e9a-895d-57d978b8a2fa)
+![image](https://github.com/chihyeonwon/How_Weather/assets/58906858/7082174c-f51d-4e15-9ce6-78754de919c3)
+
 4. **API 호출:**  인터페이스를 통해 API 호출을 수행하고, 응답을 처리
 - 필수 입력 필드:  baseDate, nx, ny
 ```kotlin
