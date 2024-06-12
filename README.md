@@ -296,8 +296,10 @@ val repository = WeatherRepository()
 ```
 ```
 기존의 WeatherModel에서 데이터를 받아올 때 경로가 너무 깊어서 보기 좋은 형태로 만들기 위함임
-
 ```
+#### 서버에서 서울특별시의 현재 날씨를 받아오기
+![image](https://github.com/chihyeonwon/How_Weather/assets/58906858/10ca0d94-6a1e-43e2-b95c-3dca667ef24b)
+
 1. - **오류 상태에 따른 데이터 관리**
     - HTTP 에러와, 네트워크 오류, 그 외의 예상치 못한 오류들을 구분하여 처리하도록 안정성 높임
     
