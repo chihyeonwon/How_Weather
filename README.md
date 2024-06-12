@@ -124,5 +124,250 @@ interface WeatherService {
     ): WeatherModel
 }
 ```
+#### WeatherModel Json to kotlin
+```Json
+{
+  "response": {
+    "header": {
+      "resultCode": "00",
+      "resultMsg": "NORMAL_SERVICE"
+    },
+    "body": {
+      "dataType": "JSON",
+      "items": {
+        "item": [
+          {
+            "baseDate": "20240127",
+            "baseTime": "0500",
+            "category": "TMP",
+            "fcstDate": "20240127",
+            "fcstTime": "0600",
+            "fcstValue": "-2",
+            "nx": 61,
+            "ny": 126
+          },
+        ]
+      },
+      "pageNo": 1,
+      "numOfRows": 12,
+      "totalCount": 809
+    }
+  }
+}
+```
+4. **API 호출:**  인터페이스를 통해 API 호출을 수행하고, 응답을 처리
+- 필수 입력 필드:  baseDate, nx, ny
+```kotlin
+class WeatherRepository {
+    suspend fun getWeather(date: String, cityName: String, pageNo: Int = 1): WeatherModel {
+        return withContext(Dispatchers.IO) {
+            val city = cityList.find { it.name == cityName } ?: cityList.first()
+            RetrofitInstance.service.getWeather(
+                baseDate = date.toInt(),
+                nx = city.nx.toString(),
+                ny = city.ny.toString(),
+                numOfRows = pageNo * 12
+            )
+        }
+    }
+}
+```
+#### City 리스트 관리
+```kotlin
+data class City(val name: String, val nx: Int, val ny: Int)
 
-4. 
+val cityList = listOf(
+    City("서울특별시", 61, 126), // 강남구 청담동
+    City("부산광역시", 99, 75),  // 해운대구 우동
+    City("인천광역시", 55, 124), // 중구 운서동
+    City("대구광역시", 89, 90),  // 수성구 범어동
+    City("대전광역시", 67, 100), // 서구 둔산동
+    City("광주광역시", 58, 74),  // 서구 치평동
+    City("울산광역시", 102, 84), // 남구 삼산동
+    City("세종특별자치시", 66, 103), // 보람동
+    City("경기도", 60, 120), // 수원시 권선구
+    City("강원도", 73, 134), // 춘천시 소양로
+    City("충청북도", 69, 107), // 청주시 상당구
+    City("충청남도", 68, 100), // 천안시 동남구
+    City("전라북도", 63, 89),  // 전주시 완산구
+    City("전라남도", 51, 67),  // 여수시
+    City("경상북도", 89, 91),  // 포항시 남구
+    City("경상남도", 91, 77),  // 창원시 성산구
+    City("제주특별자치도", 52, 38) // 제주시 일도일동
+)
+```
+#### WeatherRepository
+```kotlin
+class WeatherRepository {
+    suspend fun getWeather(date: String, cityName: String, pageNo: Int = 1): WeatherModel {
+        return withContext(Dispatchers.IO) {
+            val city = cityList.find { it.name == cityName } ?: cityList.first()
+            RetrofitInstance.service.getWeather(
+                baseDate = date.toInt(),
+                nx = city.nx.toString(),
+                ny = city.ny.toString(),
+                numOfRows = pageNo * 12
+            )
+        }
+    }
+}
+```
+5. 인터넷 권한 추가: AndroidManifest.xml 파일에 인터넷 권한을 추가해야 네트워크 요청을 할 수 있습니다.
+```kotlin
+<uses-permission android:name="android.permission.INTERNET" />
+```
+6. 결과 확인
+- 오늘 날짜 API 포멧에 맞춰 가지고 오기 (WeatherHomeFragment.kr)
+```kotlin
+private val currentDate by lazy { 
+    SimpleDateFormat("yyyyMMdd", Locale.KOREA).format(Date()) 
+}
+```
+```kotlin
+val repository = WeatherRepository()
+lifecycleScope.launch {
+    val model = repository.getWeather(currentDate, "서울특별시")
+    val data = model.toWeatherData()
+    mainWeatherText.text = data.skyStatus.text
+    mainTemperTv.text = data.temperature
+    mainRainTv.text = data.rainState.value.toString()
+    mainWaterTv.text = data.humidity
+    mainWindTv.text = data.windSpeed
+    mainRainPercentTv.text = getString(R.string.rain_percent, data.rainPercent)
+    rainStatusIv.setImageResource(data.rainState.icon)
+    weatherStatusIv.setImageResource(data.skyStatus.colorIcon)
+}
+```
+#### WeatherHomeFragment 결과 확인 ( onViewCreated 함수 안에 추가하기)
+```kotlin
+val repository = WeatherRepository()
+    lifecycleScope.launch {
+        val model = repository.getWeather(currentDate, "서울특별시")
+        val data = model.toWeatherData()
+        with(binding) {
+            mainWeatherText.text = data.skyStatus.text
+            mainTemperTv.text = data.temperature
+            mainRainTv.text = data.rainState.value.toString()
+            mainWaterTv.text = data.humidity
+            mainWindTv.text = data.windSpeed
+            mainRainPercentTv.text = getString(R.string.rain_percent, data.rainPercent)
+            rainStatusIv.setImageResource(data.rainState.icon)
+            weatherStatusIv.setImageResource(data.skyStatus.colorIcon)
+```
+#### toWeatherData (WeatherModel.kt에 추가하기)
+```kotlin
+{
+    fun toWeatherData(): WeatherData {
+        return response.body.items.item.toWeatherData()
+    }
+
+    private fun List<Item>.toWeatherData(): WeatherData {
+        val items = this
+        val time = items.find { it.category == "SKY" }?.fcstTime ?: "--:--"
+        val skyStatus = items.find { it.category == "SKY" }?.fcstValue ?: ""
+        val rainStatus = items.find { it.category == "PTY" }?.fcstValue ?: ""
+        val rainPercent = items.find { it.category == "POP" }?.fcstValue ?: ""
+        val rainAmount = items.find { it.category == "PCP" }?.fcstValue ?: ""
+        val temp = items.find { it.category == "TMP" }?.fcstValue ?: ""
+        val windSpeed = items.find { it.category == "WSD" }?.fcstValue ?: ""
+        val humidity = items.find { it.category == "REH" }?.fcstValue ?: ""
+
+        return WeatherData(
+            time = time,
+            skyStatus = SkyStatus.entries.firstOrNull { it.value == skyStatus.toInt() }
+                ?: SkyStatus.GOOD,
+            rainAmount = rainAmount,
+            rainPercent = rainPercent,
+            rainState = RainStatus.entries.firstOrNull { it.value == rainStatus.toInt() }
+                ?: RainStatus.NONE,
+            temperature = temp,
+            windSpeed = windSpeed,
+            humidity = humidity
+        )
+    }
+}
+```
+1. - **오류 상태에 따른 데이터 관리**
+    - HTTP 에러와, 네트워크 오류, 그 외의 예상치 못한 오류들을 구분하여 처리하도록 안정성 높임
+    
+    **1. `runCatching`, `onSuccess`, `onFailure` 사용법**
+    
+    - **runCatching**: 블록 내의 코드를 실행하고 결과를 **`Result`** 객체로 반환.
+    - **onSuccess**: **`Result`** 객체의 **`onSuccess`** 메서드는 블록 내의 코드가 성공적으로 실행됐을 때 호출
+    - **onFailure**: **`Result`** 객체의 **`onFailure`** 메서드는 블록 내의 코드 실행 중 에러가 발생했을 때 호출
+
+```kotlin
+    fun getWeather(date: String, city: String = regionText.value ?: "서울특별시") {
+        viewModelScope.launch {
+            runCatching {
+                repository.getWeather(date, city)
+            }.onSuccess { weatherResponse ->
+                _weatherData.value = weatherResponse.toWeatherData()
+            }.onFailure { e ->
+                handleException(e)
+            }
+        }
+    }
+
+    fun getWeatherList(date: String, count: Int = 20) {
+        viewModelScope.launch {
+            runCatching {
+                val city = regionText.value ?: "서울특별시"
+                repository.getWeather(date, city, pageNo = count)
+            }.onSuccess { weatherResponse ->
+                _weatherList.value = weatherResponse.toWeatherList(count)
+            }.onFailure { e ->
+                handleException(e)
+            }
+        }
+    }
+
+    private fun handleException(e: Throwable) {
+        when (e) {
+            is HttpException -> {
+                val errorJsonString = e.response()?.errorBody()?.string()
+                Log.e(TAG, "HTTP error: $errorJsonString")
+            }
+
+            is IOException -> Log.e(TAG, "Network error: $e")
+            else -> Log.e(TAG, "Unexpected error: $e")
+        }
+    }
+```
+2. **`HttpException`, `IOException` 예외 처리**
+- **HttpException**
+    - 네트워크 통신 과정에서 HTTP 에러가 발생했을 때 발생하는 예외
+    - 404 Not Found나 500 Internal Server Error 등의 상태 코드를 처리할 때 사용됨
+- **IOException**
+    - 네트워크 연결 문제나 파일 읽기/쓰기 과정에서 발생하는 예외
+
+### ⁉️  코드에서 보면 viewModelScope, withContext, CoroutineScope 등의 코드가 계속 나오는데요. 이건 뭔가요??
+
+- 예리하십니다! 그걸 발견했다면 여러분은 벌써 **찐 개발자**!!
+- viewModelScope, withContext는 코틀린의 **필사기** **코루틴** 입니다!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
