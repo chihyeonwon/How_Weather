@@ -6,14 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.howweather.databinding.FragmentWeatherListBinding
+import com.example.howweather.viewmodel.WeatherViewModel
 
 class WeatherListFragment : Fragment() {
     private var _binding: FragmentWeatherListBinding? = null
     private val binding get() = _binding!!
     private val listAdapter by lazy { WeatherItemListAdapter() }
+
+    private val viewModel by activityViewModels<WeatherViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,7 +31,6 @@ class WeatherListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val dataList = WeatherDataList.list
         with(binding) {
             weatherList.apply {
                 adapter = listAdapter
