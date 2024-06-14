@@ -11,26 +11,28 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.howweather.databinding.FragmentWeatherListBinding
 import com.example.howweather.viewmodel.WeatherViewModel
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class WeatherListFragment : Fragment() {
     private var _binding: FragmentWeatherListBinding? = null
     private val binding get() = _binding!!
     private val listAdapter by lazy { WeatherItemListAdapter() }
-
+    private val currentDate by lazy { SimpleDateFormat("yyyyMMdd", Locale.KOREA).format(Date()) }
     private val viewModel by activityViewModels<WeatherViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentWeatherListBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         with(binding) {
             weatherList.apply {
                 adapter = listAdapter
@@ -40,13 +42,23 @@ class WeatherListFragment : Fragment() {
                 }.also {
                     addItemDecoration(it)
                 }
-                listAdapter.submitList(dataList.toList())
             }
-            // 임시로 현재 날씨는 0번 Dummy Data로 설정
-            val currentWeather = dataList.get(0)
-            weatherStatusIv.setImageResource(currentWeather.skyStatus.colorIcon)
-            mainWeatherText.text = currentWeather.skyStatus.text
-            mainTemperTv.text = currentWeather.temperature
+            viewModel.regionText.observe(viewLifecycleOwner) {
+                regionText.text = it
+                fetchWeatherData()
+            }
+            viewModel.weatherList.observe(viewLifecycleOwner) {
+                listAdapter.submitList(it)
+                val currentWeather = it.first()
+                weatherStatusIv.setImageResource(currentWeather.skyStatus.colorIcon)
+                mainWeatherText.text = currentWeather.skyStatus.text
+                mainTemperTv.text = currentWeather.temperature
+            }
         }
+        fetchWeatherData()
+    }
+
+    private fun fetchWeatherData() {
+        viewModel.getWeatherList(currentDate)
     }
 }
