@@ -369,7 +369,14 @@ viewModel이 도시 데이터-> LiveData를 observe 감시하다가 상태가 �
 해당하는 데이터로 업데이트 하라는 지시를 내린다. 마치 react의 onState와 비슷하다.  
 ```
 
+#### WeatherListFragment 에 MVVM 패턴과 LiveData 적용
+![2024-06-14 14;40;56](https://github.com/chihyeonwon/How_Weather/assets/58906858/82be08d9-5848-4951-989f-21c9d4b745d5)
+```
+2번째 화면인 시간대별 날씨 리스트에도 1번째 화면에서 만든 MVVM 아키텍처 패턴과 LiveData를 적용한다.
 
+WeatherList를 LiveData로 Observe하다가 지역 변경이 감지되면 viewModel은 fetchWeatherList() 날씨 리스트 정보를 업데이트
+하는 함수 API를 호출하여 지역에 맞는 시간대별 날씨 리스트 ui를 업데이트한다.
+```
 
 
 
