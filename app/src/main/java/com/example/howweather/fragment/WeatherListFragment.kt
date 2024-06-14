@@ -1,4 +1,4 @@
-package com.example.howweather
+package com.example.howweather.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.howweather.R
 import com.example.howweather.databinding.FragmentWeatherListBinding
 import com.example.howweather.viewmodel.WeatherViewModel
 import java.text.SimpleDateFormat

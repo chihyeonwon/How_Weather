@@ -2,9 +2,9 @@ package com.example.howweather.model
 
 
 import android.util.Log
-import com.example.howweather.RainStatus
-import com.example.howweather.SkyStatus
-import com.example.howweather.WeatherData
+import com.example.howweather.data.RainStatus
+import com.example.howweather.data.SkyStatus
+import com.example.howweather.data.WeatherData
 import com.google.gson.annotations.SerializedName
 
 data class WeatherModel(

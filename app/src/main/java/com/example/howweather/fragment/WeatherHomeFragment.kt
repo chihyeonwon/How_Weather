@@ -1,4 +1,4 @@
-package com.example.howweather
+package com.example.howweather.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import android.widget.PopupWindow
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.howweather.R
 import com.example.howweather.data.cityList
 import com.example.howweather.databinding.FragmentWeatherHomeBinding
 import com.example.howweather.databinding.PopupListBinding

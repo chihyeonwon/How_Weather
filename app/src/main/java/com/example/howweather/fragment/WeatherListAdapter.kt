@@ -1,10 +1,12 @@
-package com.example.howweather
+package com.example.howweather.fragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.howweather.R
+import com.example.howweather.data.WeatherData
 import com.example.howweather.databinding.ItemLayoutBinding
 
 class WeatherItemListAdapter :

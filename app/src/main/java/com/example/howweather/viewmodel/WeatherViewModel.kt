@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.howweather.WeatherData
+import com.example.howweather.data.WeatherData
 import com.example.howweather.repository.WeatherRepository
 
 import kotlinx.coroutines.launch

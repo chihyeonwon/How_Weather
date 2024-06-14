@@ -1,4 +1,6 @@
-package com.example.howweather
+package com.example.howweather.data
+
+import com.example.howweather.R
 
 data class WeatherData(
     val time: String = "--:--", // 시간
