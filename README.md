@@ -359,9 +359,15 @@ val repository = WeatherRepository()
 - 예리하십니다! 그걸 발견했다면 여러분은 벌써 **찐 개발자**!!
 - viewModelScope, withContext는 코틀린의 **필사기** **코루틴** 입니다!
 
+## MVVM 패턴과 LiveData 를 적용하여 데이터 업데이트
+![2024-06-14 14;21;26](https://github.com/chihyeonwon/How_Weather/assets/58906858/48e09194-7063-4338-95ba-04122175cc98)
+```
+지역명 텍스트와 그 옆의 버튼을 클릭하면 지역을 선택하는 popup을 띄우고 popup에 나오는 City List (도시 정보 리스트)에서
+도시를 선택하면 해당하는 도시의 현재 날씨 상태 정보를 가져와서 화면에서 새로 업데이트 해준다.
 
-
-
+viewModel이 도시 데이터-> LiveData를 observe 감시하다가 상태가 변화하는 것을 감지하면 viewModel은 UI를 해당 도시 데이터에
+해당하는 데이터로 업데이트 하라는 지시를 내린다. 마치 react의 onState와 비슷하다.  
+```
 
 
 
