@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.howweather.databinding.FragmentWeatherHomeBinding
 import com.example.howweather.repository.WeatherRepository
+import com.example.howweather.viewmodel.WeatherViewModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -28,6 +30,8 @@ class WeatherHomeFragment : Fragment() {
     private val currentDate by lazy {
         SimpleDateFormat("yyyyMMdd", Locale.KOREA).format(Date())
     }
+
+    private val viewModel by activityViewModels<WeatherViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
