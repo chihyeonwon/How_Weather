@@ -1,3 +1,7 @@
+## 구글 플레이스토어에서 하늘 팔레트 앱을 다운로드하세요 !
+[하늘 팔레트](https://play.google.com/store/apps/details?id=com.wonchihyeon.skypalette)
+![image](https://github.com/chihyeonwon/SkyPalette/assets/58906858/a6113869-6646-4448-af32-08d1029b62d9)
+
 ## What is How Weather Applicatoin? ❓️
 How초단기실황, 초단기예보, 단기((구)동네)예보, 예보버전 정보를 조회하는 앱 서비스입니다.        
 초단기실황정보는 예보 구역에 대한 대표 AWS 관측값을, 초단기예보는 예보시점부터 6시간까지의 예보를,     
